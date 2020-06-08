@@ -10,7 +10,7 @@
       "include": [
         "./src"
       ],
-      "includePattern": ".+\\.(vue|js)$",
+      "includePattern": ".+\\.(vue|js|ts)$",
       "excludePattern": "(^|\\/|\\\\)_"
     },
     "plugins": [

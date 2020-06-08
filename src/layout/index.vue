@@ -8,15 +8,21 @@
       <div class="main">
         <div class="crumbs">
           <el-breadcrumb separator="/">
-            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>
-              <a href="/">活动管理</a>
+            <el-breadcrumb-item
+              v-if="routes.length !== 0"
+              :to="{ path: '/' }"
+            >首页</el-breadcrumb-item>
+            <el-breadcrumb-item
+              v-for="(route,index) in routes"
+              :key="index"
+            >
+              <router-link :to="route">{{route.meta.title}}</router-link>
             </el-breadcrumb-item>
-            <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-            <el-breadcrumb-item>活动详情</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
-        <div class="content"></div>
+        <div class="content">
+          <router-view></router-view>
+        </div>
         <footer class="footer">
           <span>@Copyright of xiaomeng</span>
         </footer>
@@ -25,14 +31,31 @@
   </div>
 </template>
 
-<script>
-import Menu from './menu'
-export default {
-  name: 'global-layout',
+<script lang="ts">
+import Menu from './menu/index.vue'
+import Vue from 'vue'
+import { Component, Watch } from 'vue-property-decorator'
+import { RouteConfig } from 'vue-router'
+
+@Component({
+  name: 'x-component-menu',
   components: {
     Menu
   }
+})
+class LayoutMenu extends Vue {
+  routes: Array<RouteConfig>;
+  constructor () {
+    super()
+    this.routes = []
+  }
+
+  @Watch('$router.matched')
+  flushRoutes (routes: Array<RouteConfig>) {
+    this.routes = routes
+  }
 }
+export default LayoutMenu
 </script>
 <style scoped lang="scss">
 @import "assets/scss/theme/default/color.scss";
@@ -57,7 +80,11 @@ export default {
       position: relative;
       overflow: hidden;
       & > .crumbs {
-        height: 40px;
+        display: flex;
+        align-items: center;
+        height: 32px;
+        line-height: 32px;
+        background-color: $bg-third;
       }
       & > .content {
         position: absolute;

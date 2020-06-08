@@ -1,49 +1,77 @@
 <template>
-  <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
-    <template v-for="(menu1,index) in menu">
-      <el-submenu :key="'menu1-sub'+index" v-if="menu1.children" :index="index">
+  <el-menu default-active="2">
+    <template v-for="(menu,index) in menu">
+      <!-- key 和 index 的值不能一样 -->
+      <el-submenu
+        :key="'menu-sub'+index"
+        v-if="menu.children"
+        :index="'menu' + index"
+      >
         <template slot="title">
-          <i class="el-icon-location"></i>
-          <span>{{menu1.name}}</span>
+          <i :class="menu.meta&&menu.meta.icon"></i>
+          <span>{{menu.meta&&menu.meta.title}}</span>
         </template>
-        <template v-for="(menu2, index2) in menu1.children">
-          <el-submenu v-if="menu2.children" :key="'menu2-sub'+index2" :index="'menu2-sub'+index2">
-            <template slot="title">{{menu2.name}}</template>
-            <el-menu-item v-for="(menu3,index3) in menu2.children" :key="'menu3'+index3" :index="'menu3'+index3">{{menu3.name}}</el-menu-item>
+        <template v-for="(menu2, index2) in menu.children">
+          <el-submenu
+            v-if="menu2.children"
+            :key="'menu2-sub'+index2"
+            :index="'menu2-sub'+index2"
+          >
+            <template slot="title">{{menu2.meta&&menu2.meta.title}}</template>
+            <el-menu-item
+              v-for="(menu3,index3) in menu2.children"
+              :key="'menu3-sub'+index3"
+              :index="'menu3-sub'+index3"
+              @click.native="() => gotoPage(menu3.path)"
+            >
+              <i :class="menu3.meta&&menu3.meta.icon"></i>
+              <span slot="title">{{menu3.meta&&menu3.meta.title}}</span>
+            </el-menu-item>
           </el-submenu>
-          <el-menu-item v-else :key="'menu2'+index2" :index="index">
-            <i class="el-icon-menu"></i>
-            <span slot="title">{{nemu2.name}}</span>
+          <el-menu-item
+            @click.native="() => gotoPage(menu2.path)"
+            v-else
+            :key="'menu2-sub'+index2"
+            :index="'menu2'+index2"
+          >
+            <i :class="menu2.meta&&menu2.meta.icon"></i>
+            <span slot="title">{{menu2.meta&&menu2.meta.title}}</span>
           </el-menu-item>
         </template>
       </el-submenu>
-      <el-menu-item v-else :key="'menu1-sub'+index" :index="index">
-        <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
+      <el-menu-item
+        @click.native="() => gotoPage(menu.path)"
+        v-else
+        :key="'menu-sub'+index"
+        :index="'menu' +index"
+      >
+        <i :class="menu.meta&&menu.meta.icon"></i>
+        <span slot="title">{{menu.meta&&menu.meta.title}}</span>
       </el-menu-item>
     </template>
   </el-menu>
 </template>
-<script>
-export default {
-  data () {
-    return {
-      menu: [{
-        name: '一级菜单',
-        children: [{
-          name: '二级菜单',
-          children: [{
-            name: '三级菜单'
-          }, {
-            name: '三级菜单'
-          }]
-        }]
-      }, {
-        name: '一级菜单二'
-      }]
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+import { routes } from '../../router'
+@Component({
+  name: 'layout-menu'
+})
+class Menu extends Vue {
+  menu: Array<Object>;
+  constructor () {
+    super()
+    this.menu = routes
+  }
+
+  gotoPage (path: string) {
+    if (this.$route.path === path) {
+      return
     }
+    this.$router.push(path)
   }
 }
+export default Menu
 </script>
 <style lang="sass" scoped>
 </style>

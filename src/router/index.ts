@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
+import upload from './upload'
+import test from './test'
 
 Vue.use(VueRouter)
 
-const routes: Array<RouteConfig> = [
-]
+export const routes: Array<RouteConfig> = [upload, test]
 
 const router = new VueRouter({
   routes
