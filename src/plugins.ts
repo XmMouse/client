@@ -14,7 +14,7 @@ import 'element-ui/lib/theme-chalk/index.css'
  * @returns {VueConstructor}
  */
 export default (vue: VueConstructor): VueConstructor => {
-  vue.use(ElementUI)
-  vue.use(VueRouter)
-  return vue
+    vue.use(ElementUI)
+    vue.use(VueRouter)
+    return vue
 }

@@ -16,9 +16,9 @@
     ],
     "paths": {
       "@view": ["src/views"],
-      "@scss": ["src/static/scss"],
-      "@ts": ["src/static/ts"],
-      "@img": ["src/static/img"],
+      "@scss": ["src/assets/scss"],
+      "@ts": ["src/assets/ts"],
+      "@img": ["src/assets/img"],
       "@api": ["src/api"],
       "@/*": [
         "src/*"

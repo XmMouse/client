@@ -1,19 +1,20 @@
 <template>
-  <div class="page">asdfsadfsadfasdfasdf</div>
+  <div class="container">
+    index
+  </div>
 </template>
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-
 @Component({
-    name: 'x-page-blob'
+    name: 'x-index-page'
 })
-class XPageBlob extends Vue {
+class IndexPage extends Vue {
 }
-export default XPageBlob
+export default IndexPage
 </script>
 <style lang="scss" scoped>
-.page{
+.container {
   width: 100%;
   height: 100%;
 }

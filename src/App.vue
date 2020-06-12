@@ -6,9 +6,9 @@
 <script>
 import Layout from './layout/index'
 export default {
-  components: {
-    Layout
-  }
+    components: {
+        Layout
+    }
 }
 </script>
 <style lang="scss">

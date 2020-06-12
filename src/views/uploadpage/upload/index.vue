@@ -6,7 +6,7 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 @Component({
-  name: 'x-page-upload'
+    name: 'x-page-upload'
 })
 class UploadPage extends Vue {
 

@@ -1,18 +1,20 @@
 
 module.exports = {
-    "root": true,
-    "env": {
-      "node": true
+    root: true,
+    env: {
+        node: true
     },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended",
-      "@vue/standard",
-      "@vue/typescript/recommended"
+    extends: [
+        'plugin:vue/essential',
+        'eslint:recommended',
+        '@vue/standard',
+        '@vue/typescript/recommended'
     ],
-    "parserOptions": {
-      "parser": "babel-eslint",
-      "ecmaVersion": 2020
+    parserOptions: {
+        parser: 'babel-eslint',
+        ecmaVersion: 2020
     },
-    "rules": {}
-  }
+    rules: {
+        indent: ['error', 4]
+    }
+}
